@@ -188,9 +188,6 @@
 
 
 
-
-
-
 import { useState } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
@@ -199,42 +196,58 @@ import './Auth.css';
 export default function Signup() {
   const location = useLocation();
   const navigate = useNavigate();
+  const { register } = useAuth();
 
   const passedEmail = location.state?.email || '';
 
   const [step, setStep] = useState(
     passedEmail && passedEmail.includes('@') ? 2 : 1
   );
+
   const [email, setEmail] = useState(passedEmail);
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [submitting, setSubmitting] = useState(false);
 
-  const { register, checkEmail } = useAuth();
+  const API_BASE = 'https://netflix-clone-5ayq.onrender.com/api/auth';
 
   const handleStep1 = async (e) => {
     e.preventDefault();
     setError('');
 
-    if (!email || !email.includes('@')) {
-      setError('Please enter a valid email address.');
+    if (!email.trim()) {
+      setError('Please enter your email.');
       return;
     }
 
     setSubmitting(true);
 
     try {
-      const exists = await checkEmail(email.trim());
+      const response = await fetch(`${API_BASE}/check-email`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email: email.trim(),
+        }),
+      });
 
-      if (exists) {
+      const data = await response.json();
+
+      console.log('CHECK EMAIL RESPONSE:', data);
+
+      if (data.exists === true) {
         setError(
           'An account with this email already exists. Please sign in.'
         );
       } else {
+        setError('');
         setStep(2);
       }
     } catch (err) {
-      setError('Network error. Please try again.');
+      console.error(err);
+      setError('Unable to connect to server.');
     } finally {
       setSubmitting(false);
     }
@@ -244,7 +257,7 @@ export default function Signup() {
     e.preventDefault();
     setError('');
 
-    if (!password || password.length < 6) {
+    if (password.length < 6) {
       setError('Password must be at least 6 characters.');
       return;
     }
@@ -260,11 +273,12 @@ export default function Signup() {
       await register(email.trim(), password);
       navigate('/browse');
     } catch (err) {
+      console.error(err);
+
       setError(
-        err.response?.data?.message ||
+        err?.response?.data?.message ||
         'Registration failed. Please try again.'
       );
-      setStep(1);
     } finally {
       setSubmitting(false);
     }
@@ -282,7 +296,11 @@ export default function Signup() {
       </div>
 
       <div className="auth-page__card">
-        {error && <div className="auth-form__error">{error}</div>}
+        {error && (
+          <div className="auth-form__error">
+            {error}
+          </div>
+        )}
 
         {step === 1 && (
           <div className="signup-step">
@@ -297,7 +315,7 @@ export default function Signup() {
             </h2>
 
             <p className="signup-step__text">
-              Just a few more steps and you're done! We hate paperwork, too.
+              Just a few more steps and you're done!
             </p>
 
             <form
@@ -314,7 +332,6 @@ export default function Signup() {
                     setEmail(e.target.value)
                   }
                   required
-                  autoComplete="email"
                 />
               </div>
 
@@ -326,16 +343,6 @@ export default function Signup() {
                 {submitting ? 'Checking...' : 'Next'}
               </button>
             </form>
-
-            <div
-              className="auth-form__footer"
-              style={{ marginTop: '24px' }}
-            >
-              <p>
-                Already have an account?{' '}
-                <Link to="/login">Sign in</Link>.
-              </p>
-            </div>
           </div>
         )}
 
@@ -351,38 +358,27 @@ export default function Signup() {
               Create a password
             </h2>
 
-            <p className="signup-step__text">
-              Add a password so you can log in next time.
-            </p>
-
             <form
               className="auth-form"
               onSubmit={handleStep2}
             >
-              <div className="auth-form__input-group">
-                <input
-                  type="email"
-                  className="auth-form__input"
-                  value={email}
-                  disabled
-                  style={{ opacity: 0.6 }}
-                />
-              </div>
+              <input
+                type="email"
+                className="auth-form__input"
+                value={email}
+                disabled
+              />
 
-              <div className="auth-form__input-group">
-                <input
-                  type="password"
-                  className="auth-form__input"
-                  placeholder="Add a password"
-                  value={password}
-                  onChange={(e) =>
-                    setPassword(e.target.value)
-                  }
-                  required
-                  minLength={6}
-                  autoComplete="new-password"
-                />
-              </div>
+              <input
+                type="password"
+                className="auth-form__input"
+                placeholder="Password"
+                value={password}
+                onChange={(e) =>
+                  setPassword(e.target.value)
+                }
+                required
+              />
 
               <button
                 type="submit"
@@ -406,15 +402,10 @@ export default function Signup() {
               You're almost done!
             </h2>
 
-            <p className="signup-step__text">
-              Click below to create your account and start watching.
-            </p>
-
             <button
               className="auth-form__submit"
               onClick={handleStep3}
               disabled={submitting}
-              style={{ marginTop: 0 }}
             >
               {submitting
                 ? 'Creating Account...'
