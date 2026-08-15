@@ -1,0 +1,58 @@
+[
+  {
+    "_id": "usr_17867562851960urue",
+    "email": "demo@netflix.com",
+    "password": "$2a$10$D2dbuCmwKFHeqWzk4qITmOZ01.S3akKBd1ugqkRgX46BEQRBPmEUK",
+    "profiles": [
+      {
+        "name": "User",
+        "avatar": "/avatars/default.png",
+        "isKids": false
+      }
+    ],
+    "role": "user",
+    "createdAt": "2026-08-15T01:11:25.196Z"
+  },
+  {
+    "_id": "usr_17867563298216mdt1",
+    "email": "satishpandit727@gmail.com",
+    "password": "$2a$10$dEDYsk2FeY49mbjs3FzmfeuLXAZ7su3D.QevR/mQVNnhVgsjZazn.",
+    "profiles": [
+      {
+        "name": "User",
+        "avatar": "/avatars/default.png",
+        "isKids": false
+      }
+    ],
+    "role": "user",
+    "createdAt": "2026-08-15T01:12:09.821Z"
+  },
+  {
+    "_id": "usr_1786764654329odxkf",
+    "email": "satishpandit272@gmail.com",
+    "password": "$2a$10$I24sqBmR94EKAuE7Cg1v6uttECtboa3rAu4t1A7/kw7iWTiE3Yudm",
+    "profiles": [
+      {
+        "name": "User",
+        "avatar": "/avatars/default.png",
+        "isKids": false
+      }
+    ],
+    "role": "user",
+    "createdAt": "2026-08-15T03:30:54.329Z"
+  },
+  {
+    "_id": "usr_1786786666838cfpes",
+    "email": "satishpandit12@gmail.com",
+    "password": "$2a$10$v.h1IBsgGLqARiegjtYhQ.NCHkJi1fOjM8xrG.13pjUYcQyfUAmX2",
+    "profiles": [
+      {
+        "name": "User",
+        "avatar": "/avatars/default.png",
+        "isKids": false
+      }
+    ],
+    "role": "user",
+    "createdAt": "2026-08-15T09:37:46.839Z"
+  }
+]

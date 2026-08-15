@@ -1,0 +1,225 @@
+/* ============================================================
+   NETFLIX CLONE — GLOBAL DESIGN SYSTEM
+   Source of truth: netflix_ui_blueprint.md
+   ============================================================ */
+
+/* Google Fonts — Inter (Netflix Sans web fallback) */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+/* ============================================================
+   CSS CUSTOM PROPERTIES — NETFLIX DESIGN TOKENS
+   ============================================================ */
+:root {
+  /* ─── Color Palette ─── */
+  --color-bg-primary:     #141414;
+  --color-bg-surface:     #181818;
+  --color-bg-surface-alt: #2f2f2f;
+  --color-brand-red:      #e50914;
+  --color-brand-red-hover:#f40612;
+  --color-text-primary:   #ffffff;
+  --color-text-secondary: #b3b3b3;
+  --color-text-dim:       #737373;
+  --color-match-green:    #46d369;
+  --color-overlay:        rgba(0, 0, 0, 0.7);
+  --color-card-border:    rgba(255, 255, 255, 0.15);
+
+  /* ─── Navbar ─── */
+  --navbar-height: 68px;
+
+  /* ─── Row Padding (per blueprint spec) ─── */
+  --row-pad: 60px;
+
+  /* ─── Typography ─── */
+  --font-sans: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+
+  /* ─── Easing ─── */
+  --ease-fast:     150ms ease;
+  --ease-base:     200ms ease;
+  --ease-slow:     300ms ease;
+  --ease-cinematic: cubic-bezier(0.25, 0.1, 0.25, 1.0);
+
+  /* ─── Shadows ─── */
+  --shadow-card:   0 8px 32px rgba(0, 0, 0, 0.8);
+  --shadow-navbar: 0 2px 16px rgba(0, 0, 0, 0.5);
+}
+
+/* ============================================================
+   RESET & BASE
+   ============================================================ */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--color-bg-primary);
+  color: var(--color-text-primary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  background: none;
+  font-family: inherit;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  /* Fallback background if image fails to load */
+  background-color: #1a1a1a;
+}
+
+ul, ol {
+  list-style: none;
+}
+
+/* ─── Global Scrollbar Hide ─── */
+::-webkit-scrollbar          { width: 0; height: 0; }
+*                             { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* ============================================================
+   SHIMMER / SKELETON ANIMATION
+   Per blueprint §11: background moves left → right
+   ============================================================ */
+@keyframes shimmer {
+  0%   { background-position: -1200px 0; }
+  100% { background-position:  1200px 0; }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes slideUpFade {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes heroPulse {
+  0%, 100% { opacity: 0.95; }
+  50%       { opacity: 1; }
+}
+
+/* Reusable shimmer class */
+.skeleton-shimmer {
+  background: linear-gradient(
+    90deg,
+    rgba(30, 30, 30, 1)  0%,
+    rgba(55, 55, 55, 1) 50%,
+    rgba(30, 30, 30, 1) 100%
+  );
+  background-size: 2400px 100%;
+  animation: shimmer 2.2s infinite linear;
+  border-radius: 4px;
+}
+
+/* ============================================================
+   NETFLIX BUTTON SYSTEM
+   ============================================================ */
+
+/* White "Play" button */
+.btn-netflix-play {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background-color: var(--color-text-primary);
+  color: #000;
+  border-radius: 4px;
+  padding: 10px 28px;
+  font-size: 1.05rem;
+  font-weight: 600;
+  font-family: var(--font-sans);
+  transition: background-color var(--ease-fast);
+  border: none;
+  cursor: pointer;
+  white-space: nowrap;
+  line-height: 1;
+}
+
+.btn-netflix-play:hover {
+  background-color: rgba(255, 255, 255, 0.75);
+}
+
+/* Dark "More Info" button */
+.btn-netflix-info {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background-color: rgba(109, 109, 110, 0.7);
+  color: var(--color-text-primary);
+  border-radius: 4px;
+  padding: 10px 28px;
+  font-size: 1.05rem;
+  font-weight: 600;
+  font-family: var(--font-sans);
+  transition: background-color var(--ease-fast);
+  border: none;
+  cursor: pointer;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  white-space: nowrap;
+  line-height: 1;
+}
+
+.btn-netflix-info:hover {
+  background-color: rgba(109, 109, 110, 0.5);
+}
+
+/* ============================================================
+   NETFLIX WORDMARK (reused across Navbar components)
+   ============================================================ */
+.netflix-wordmark {
+  color: var(--color-brand-red);
+  font-size: 1.8rem;
+  font-weight: 900;
+  letter-spacing: 4px;
+  font-family: 'Arial Black', 'Arial Bold', Gadget, sans-serif;
+  text-transform: uppercase;
+  line-height: 1;
+  user-select: none;
+}
+
+.netflix-wordmark--sm {
+  font-size: 1.4rem;
+  letter-spacing: 3px;
+}
+
+/* ============================================================
+   RESPONSIVE BREAKPOINTS
+   ============================================================ */
+@media (max-width: 1366px) {
+  :root { --row-pad: 48px; }
+}
+
+@media (max-width: 1024px) {
+  :root { --row-pad: 32px; }
+}
+
+@media (max-width: 768px) {
+  :root {
+    --row-pad: 24px;
+    --navbar-height: 56px;
+  }
+}
+
+@media (max-width: 480px) {
+  :root { --row-pad: 16px; }
+}
