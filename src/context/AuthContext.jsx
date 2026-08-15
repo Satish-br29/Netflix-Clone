@@ -3,7 +3,7 @@ import axios from 'axios';
 
 const AuthContext = createContext(null);
 
-const API_URL = 'http://localhost:5000/api/auth';
+const API_URL = 'https://netflix-clone-5ayq.onrender.com/api/auth';
 
 // Create axios instance with credentials for HTTP-only cookies
 const authApi = axios.create({
