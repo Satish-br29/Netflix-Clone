@@ -1,11 +1,10 @@
-```markdown
 # 🎬 Netflix Clone
 
 A full-stack **Netflix-inspired streaming platform** built with the **MERN stack**. Features a modern responsive UI, TMDB integration, authentication, hover previews, trailers, and cinematic movie details.
 
 ## 🚀 Live Demo
 
-👉 [View Live Website]((https://netflix-clone-e34395n94-satish-stuffs.vercel.app/))
+👉 [Go Live]((https://netflix-clone-e34395n94-satish-stuffs.vercel.app/))
 
 ## 📸 Screenshots
 
