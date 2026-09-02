@@ -209,7 +209,7 @@ export default function Signup() {
   const [error, setError] = useState('');
   const [submitting, setSubmitting] = useState(false);
 
-  const API_BASE = 'https://netflix-clone-5ayq.onrender.com/api/auth';
+  const API_BASE = import.meta.env.VITE_API_URL || 'https://netflix-clone-5ayq.onrender.com/api/auth';
 
   const handleStep1 = async (e) => {
     e.preventDefault();

@@ -37,8 +37,8 @@ const generateToken = (res, userId, role) => {
   // Set HTTP-only cookie
   res.cookie('netflix_token', token, {
     httpOnly: true,
-    secure: process.env.NODE_ENV === 'production',
-    sameSite: 'lax',
+    secure: true, // MUST be true for cross-domain cookies
+    sameSite: 'none', // MUST be 'none' for cross-domain cookies (Vercel -> Render)
     maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
   });
 

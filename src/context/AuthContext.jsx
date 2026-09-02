@@ -98,7 +98,7 @@ import axios from 'axios';
 const AuthContext = createContext(null);
 
 // Render Backend URL
-const API_URL = 'https://netflix-clone-5ayq.onrender.com/api/auth';
+const API_URL = import.meta.env.VITE_API_URL || 'https://netflix-clone-5ayq.onrender.com/api/auth';
 
 const authApi = axios.create({
   baseURL: API_URL,
