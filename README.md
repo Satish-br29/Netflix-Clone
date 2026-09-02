@@ -1,10 +1,10 @@
 # 🎬 Netflix Clone
 
-A full-stack **Netflix-inspired streaming platform** built with the **MERN stack**. Features a modern responsive UI, TMDB integration, authentication, hover previews, trailers, and cinematic movie details.
+Built a full-stack media streaming web application modeled after Netflix as a hands-on project in full-stack engineering. Developed with MongoDB, Express.js, React, and Node.js (MERN), the platform leverages the TMDB API for live data fetching, rendering interactive trailers and detailed movie metadata. Features include JWT authentication, user watchlists, and a responsive UI designed with modern styling and performance optimizations across desktop and mobile devices.
 
 ## 🚀 Live Demo
 
-👉 [Go Live]((https://netflix-clone-e34395n94-satish-stuffs.vercel.app/))
+👉 [Go Live](https://netflix-clone-e34395n94-satish-stuffs.vercel.app/)
 
 ## 📸 Screenshots
 
@@ -179,5 +179,4 @@ Built this clone for **learning and academic purposes** to practice MERN stack d
 
 ---
 
-⭐ If you like this project, consider giving the repository a star!
-```
+⭐ Thanks for your visit, If you like this project, consider giving the repository a star!
